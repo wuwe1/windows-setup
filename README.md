@@ -11,7 +11,10 @@ irm https://raw.githubusercontent.com/wuwe1/windows-setup/main/install.ps1 | iex
 ```
 
 This installs AutoHotkey + PowerToys (via winget), puts this repo in `~\windows-setup`,
-registers `mac-keys.ahk` to start at login, and starts it.
+registers `mac-keys.ahk` to start at login, starts it, and sets the PowerToys
+Command Palette hotkey to Alt+Space (Spotlight position).
+
+Mac-style keys apply only in Chrome/Edge, Windows Terminal and File Explorer windows.
 
 ## Editing
 
