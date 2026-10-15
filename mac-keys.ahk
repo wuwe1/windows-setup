@@ -56,4 +56,22 @@ $!v:: {
 !7:: Send "^!7"
 !8:: Send "^!8"
 !9:: Send "^!9"
+
+; --- File Explorer windows (not desktop/taskbar, which are also explorer.exe) ---
+#HotIf WinActive("ahk_class CabinetWClass")
+!t::  Send "^t"          ; new tab
+!w::  Send "^w"          ; close tab
+!n::  Send "^n"          ; new window
+!+n:: Send "^+n"         ; new folder
+!l::  Send "^l"          ; address bar
+!f::  Send "^f"          ; search
+!a::  Send "^a"
+!c::  Send "^c"
+!x::  Send "^x"
+!v::  Send "^v"
+!z::  Send "^z"
+!+z:: Send "^y"          ; redo
+!BS:: Send "{Delete}"    ; move to Recycle Bin
+!+[:: Send "^+{Tab}"     ; previous tab
+!+]:: Send "^{Tab}"      ; next tab
 #HotIf
