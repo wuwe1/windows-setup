@@ -1,24 +1,60 @@
 # One-shot setup for a new Windows machine:
 #   irm https://raw.githubusercontent.com/wuwe1/windows-setup/main/install.ps1 | iex
+# Safe to re-run. Works from Windows PowerShell 5.1 or PowerShell 7.
 $ErrorActionPreference = 'Stop'
 
 $Repo    = 'wuwe1/windows-setup'
 $Dir     = Join-Path $HOME 'windows-setup'
 $Script  = Join-Path $Dir 'mac-keys.ahk'
 
-Write-Host '==> Installing AutoHotkey and PowerToys' -ForegroundColor Cyan
-foreach ($id in 'AutoHotkey.AutoHotkey', 'Microsoft.PowerToys') {
-    winget install --id $id -e --silent --accept-package-agreements --accept-source-agreements
+# Pick up PATH changes made by installers in this session
+function Update-Path {
+    $env:Path = [Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' +
+                [Environment]::GetEnvironmentVariable('Path', 'User')
 }
 
+Write-Host '==> Installing Git' -ForegroundColor Cyan
+winget install --id Git.Git -e --silent --no-upgrade --accept-package-agreements --accept-source-agreements
+Update-Path
+
 Write-Host "==> Fetching config into $Dir" -ForegroundColor Cyan
-if (Get-Command git -ErrorAction SilentlyContinue) {
-    if (Test-Path (Join-Path $Dir '.git')) { git -C $Dir pull --ff-only }
-    else { git clone "https://github.com/$Repo.git" $Dir }
-} else {
-    New-Item -ItemType Directory -Force $Dir | Out-Null
-    Invoke-WebRequest "https://raw.githubusercontent.com/$Repo/main/mac-keys.ahk" -OutFile $Script
+if (Test-Path (Join-Path $Dir '.git')) { git -C $Dir pull --ff-only }
+else { git clone "https://github.com/$Repo.git" $Dir }
+git config --global core.autocrlf input
+
+Write-Host '==> Installing apps (configuration.dsc.yaml)' -ForegroundColor Cyan
+winget configure -f (Join-Path $Dir 'configuration.dsc.yaml') --accept-configuration-agreements
+Update-Path
+$Pwsh = (Get-Command pwsh -ErrorAction SilentlyContinue).Source
+if (-not $Pwsh) { throw 'pwsh not found after install' }
+
+Write-Host '==> Installing Nerd Fonts' -ForegroundColor Cyan
+$Fonts = 'HKCU:', 'HKLM:' | ForEach-Object {
+    (Get-ItemProperty "$_\Software\Microsoft\Windows NT\CurrentVersion\Fonts" -ErrorAction SilentlyContinue).PSObject.Properties.Name
 }
+# oh-my-posh font name = Windows font family it installs
+foreach ($f in @{ CascadiaCode = 'CaskaydiaCove NF' }.GetEnumerator()) {
+    if (-not ($Fonts -like "$($f.Value) Regular*")) { oh-my-posh font install $f.Key --headless }
+}
+
+Write-Host '==> Setting up PowerShell 7 profile' -ForegroundColor Cyan
+& $Pwsh -NoProfile -Command 'if (-not (Get-Module -ListAvailable Terminal-Icons)) { Install-Module Terminal-Icons -Scope CurrentUser -Force }'
+# $PROFILE becomes a one-line stub that loads the repo's profile
+$Profile7 = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'PowerShell\Microsoft.PowerShell_profile.ps1'
+$Stub = '. "$HOME\windows-setup\powershell\profile.ps1"'
+if (-not ((Test-Path $Profile7) -and (Get-Content $Profile7 -Raw) -like "*$Stub*")) {
+    if (Test-Path $Profile7) {
+        Move-Item $Profile7 "$Profile7.bak" -Force
+        Write-Warning "Old profile saved as $Profile7.bak"
+    }
+    New-Item -ItemType File -Force $Profile7 -Value "$Stub`n" | Out-Null
+}
+
+Write-Host '==> Applying Windows Terminal appearance' -ForegroundColor Cyan
+& $Pwsh -NoProfile -File (Join-Path $Dir 'terminal\apply.ps1')
+
+Write-Host '==> Applying Windows tweaks (tweaks.ps1)' -ForegroundColor Cyan
+& $Pwsh -NoProfile -File (Join-Path $Dir 'tweaks.ps1')
 
 $Ahk = @(
     "$env:LOCALAPPDATA\Programs\AutoHotkey\v2\AutoHotkey64.exe",
@@ -54,4 +90,4 @@ if (Test-Path $CmdPalSettings) {
     Write-Warning 'Command Palette settings not found; set Alt+Space manually in its settings.'
 }
 
-Write-Host '==> Done. mac-keys is running.' -ForegroundColor Green
+Write-Host '==> Done. mac-keys is running; open a new Windows Terminal tab to see the prompt.' -ForegroundColor Green

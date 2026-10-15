@@ -1,6 +1,7 @@
 # windows-setup
 
-Mac-style keys on Windows (Alt as Cmd) via AutoHotkey, plus PowerToys.
+New-machine bootstrap: Mac-style keys on Windows (Alt as Cmd) via AutoHotkey,
+plus apps, PowerShell profile, Windows Terminal look and a few Explorer tweaks.
 
 ## Install on a new machine
 
@@ -10,12 +11,31 @@ Open PowerShell and run:
 irm https://raw.githubusercontent.com/wuwe1/windows-setup/main/install.ps1 | iex
 ```
 
-This installs AutoHotkey + PowerToys (via winget), puts this repo in `~\windows-setup`,
-registers `mac-keys.ahk` to start at login, starts it, and sets the PowerToys
-Command Palette hotkey to Alt+Space (Spotlight position).
+Safe to re-run. In order, it:
+
+1. Installs Git and puts this repo in `~\windows-setup`; sets `git config --global core.autocrlf input`.
+2. Installs apps from `configuration.dsc.yaml` via `winget configure`
+   (already-installed apps are left alone, not upgraded).
+3. Installs the CaskaydiaCove NF Nerd Font with oh-my-posh.
+4. Installs the Terminal-Icons module and makes PowerShell 7's `$PROFILE` a one-line stub
+   that loads `powershell\profile.ps1` (an existing profile is kept as `.bak`).
+5. Merges `terminal\appearance.json` into Windows Terminal's `settings.json`
+   (only those keys; backup in `settings.json.bak`).
+6. Runs `tweaks.ps1`: show file extensions and hidden files, no Start menu ads, full right-click menu, no Bing in search; then restarts Explorer.
+7. Registers `mac-keys.ahk` to start at login, starts it, and sets the PowerToys
+   Command Palette hotkey to Alt+Space (Spotlight position).
 
 Mac-style keys apply only in Chrome/Edge, Windows Terminal and File Explorer windows.
 
+## Apps
+
+AutoHotkey, PowerToys, Everything, Files, Twinkle Tray, EarTrumpet, Windhawk,
+Git, GitHub CLI, PowerShell 7, Oh My Posh. Add or remove one in `configuration.dsc.yaml`.
+
 ## Editing
 
-Edit `~\windows-setup\mac-keys.ahk`, double-click it to reload, then commit and push.
+Edit files in `~\windows-setup`, then commit and push.
+
+- `mac-keys.ahk`: double-click it to reload.
+- `powershell\profile.ps1`: open a new terminal tab.
+- `terminal\appearance.json`, `tweaks.ps1`: re-run `install.ps1` (or just that script).

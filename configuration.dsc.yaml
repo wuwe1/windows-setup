@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+# Apps for a new machine. Apply with:
+#   winget configure -f configuration.dsc.yaml --accept-configuration-agreements
+# Already-installed apps are left alone.
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: git
+      directives:
+        description: Git
+      settings:
+        id: Git.Git
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: gh
+      directives:
+        description: GitHub CLI
+      settings:
+        id: GitHub.cli
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: pwsh
+      directives:
+        description: PowerShell 7
+      settings:
+        id: Microsoft.PowerShell
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ohmyposh
+      directives:
+        description: Oh My Posh (prompt)
+      settings:
+        id: JanDeDobbeleer.OhMyPosh
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: autohotkey
+      directives:
+        description: AutoHotkey (mac-keys.ahk)
+      settings:
+        id: AutoHotkey.AutoHotkey
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: powertoys
+      directives:
+        description: PowerToys
+      settings:
+        id: Microsoft.PowerToys
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: everything
+      directives:
+        description: Everything (file search)
+      settings:
+        id: voidtools.Everything
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: files
+      directives:
+        description: Files (file manager)
+      settings:
+        id: FilesCommunity.Files
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: twinkletray
+      directives:
+        description: Twinkle Tray (monitor brightness)
+      settings:
+        id: xanderfrangos.twinkletray
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: eartrumpet
+      directives:
+        description: EarTrumpet (per-app volume)
+      settings:
+        id: File-New-Project.EarTrumpet
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: windhawk
+      directives:
+        description: Windhawk (Windows mods)
+      settings:
+        id: RamenSoftware.Windhawk
+        source: winget
