@@ -1,104 +1,59 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-; Mac-style key remapping for Windows
-; $ prefix prevents hotkey from being triggered by Send commands
+; Mac-style Cmd keys, scoped to specific apps only.
+; Alt sits where Cmd is on a Mac keyboard. Everywhere else, Alt is untouched.
 
-; --- Edit ---
-$^w:: {
-    Send "^{Backspace}"
-}
-!z:: {
-    Send "^z"
-}
-!+z:: {
-    Send "^y"
-}
-!x:: {
-    Send "^x"
-}
-!c:: {
-    Send "^c"
-}
+GroupAdd "Browser", "ahk_exe chrome.exe"
+GroupAdd "Browser", "ahk_exe msedge.exe"
+
+; --- Browser: Alt+key -> Ctrl+key ---
+#HotIf WinActive("ahk_group Browser")
+!t::  Send "^t"      ; new tab
+!+t:: Send "^+t"     ; reopen closed tab
+!w::  Send "^w"      ; close tab
+!n::  Send "^n"      ; new window
+!+n:: Send "^+n"     ; new incognito window
+!l::  Send "^l"      ; address bar
+!r::  Send "^r"      ; reload
+!f::  Send "^f"      ; find
+!a::  Send "^a"
+!c::  Send "^c"
+!x::  Send "^x"
+!v::  Send "^v"
+!z::  Send "^z"
+!+z:: Send "^+z"     ; redo
+!+[:: Send "^+{Tab}" ; previous tab
+!+]:: Send "^{Tab}"  ; next tab
+!1::  Send "^1"
+!2::  Send "^2"
+!3::  Send "^3"
+!4::  Send "^4"
+!5::  Send "^5"
+!6::  Send "^6"
+!7::  Send "^7"
+!8::  Send "^8"
+!9::  Send "^9"
+
+; --- Windows Terminal: Alt+key -> Terminal's own shortcuts ---
+#HotIf WinActive("ahk_exe WindowsTerminal.exe")
+!t:: Send "^+t"      ; new tab
+!w:: Send "^+w"      ; close tab
+!c:: Send "^+c"      ; copy selection
 $!v:: {
-    ; In Windows Terminal, pass real Alt+V through when clipboard has an image
-    ; (Claude Code uses Alt+V to paste images; Ctrl+V only pastes text there)
-    if WinActive("ahk_exe WindowsTerminal.exe") && DllCall("IsClipboardFormatAvailable", "UInt", 8)
+    ; Image on clipboard: pass real Alt+V through (Claude Code pastes images with it)
+    if DllCall("IsClipboardFormatAvailable", "UInt", 8)
         Send "!v"
     else
-        Send "^v"
+        Send "^+v"
 }
-!a:: {
-    Send "^a"
-}
-!s:: {
-    Send "^s"
-}
-!f:: {
-    Send "^f"
-}
-
-; --- Text navigation ---
-!Left:: {
-    Send "{Home}"
-}
-!Right:: {
-    Send "{End}"
-}
-!Up:: {
-    Send "^{Home}"
-}
-!Down:: {
-    Send "^{End}"
-}
-
-; --- Browser/Window ---
-!w:: {
-    Send "^w"
-}
-!t:: {
-    Send "^t"
-}
-!+t:: {
-    Send "^+t"
-}
-!r:: {
-    Send "^r"
-}
-!l:: {
-    Send "^l"
-}
-!n:: {
-    Send "^n"
-}
-!+n:: {
-    Send "^+n"
-}
-!q:: {
-    Send "!{F4}"
-}
-
-; --- Tab switching ---
-!+[:: {
-    Send "^+{Tab}"
-}
-!+]:: {
-    Send "^{Tab}"
-}
-
-; --- Switch to tab 1-9 (Terminal uses Ctrl+Alt+N) ---
-SwitchTab(n) {
-    if WinActive("ahk_exe WindowsTerminal.exe")
-        Send "^!{" n "}"
-    else
-        Send "^{" n "}"
-}
-!1:: SwitchTab("1")
-!2:: SwitchTab("2")
-!3:: SwitchTab("3")
-!4:: SwitchTab("4")
-!5:: SwitchTab("5")
-!6:: SwitchTab("6")
-!7:: SwitchTab("7")
-!8:: SwitchTab("8")
-!9:: SwitchTab("9")
+!1:: Send "^!1"
+!2:: Send "^!2"
+!3:: Send "^!3"
+!4:: Send "^!4"
+!5:: Send "^!5"
+!6:: Send "^!6"
+!7:: Send "^!7"
+!8:: Send "^!8"
+!9:: Send "^!9"
+#HotIf
