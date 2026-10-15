@@ -21,7 +21,8 @@ Safe to re-run. In order, it:
    that loads `powershell\profile.ps1` (an existing profile is kept as `.bak`).
 5. Merges `terminal\appearance.json` into Windows Terminal's `settings.json`
    (only those keys; backup in `settings.json.bak`).
-6. Runs `tweaks.ps1`: show file extensions and hidden files, no Start menu ads, full right-click menu, no Bing in search; then restarts Explorer.
+6. Runs `tweaks.ps1`: show file extensions and hidden files, no Start menu ads, full right-click menu, no Bing in search, no taskbar search box or Task View; then restarts Explorer.
+   Turn off taskbar Widgets by hand (Settings > Personalization > Taskbar); Windows blocks scripts from changing it.
 7. Registers `mac-keys.ahk` to start at login, starts it, and sets the PowerToys
    Command Palette hotkey to Alt+Space (Spotlight position).
 
