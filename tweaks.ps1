@@ -22,7 +22,7 @@ Set-Reg $Cdm SilentInstalledAppsEnabled 0
 Set-Reg 'HKCU:\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32' '(Default)' '' String
 
 # Windows search: no Bing web results
-Set-Reg 'HKCU:\Software\Policies\Microsoft\Windows\Explorer' DisableSearchBoxSuggestions 1
+Set-Reg 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Search' BingSearchEnabled 0
 
 # Restart Explorer so the changes show up now (taskbar blinks, open folder windows close)
 Stop-Process -Name explorer -Force
