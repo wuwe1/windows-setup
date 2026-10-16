@@ -3,7 +3,10 @@
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}"
   },
   "defaults": {
-    "colorScheme": "One Half Dark",
+    "colorScheme": {
+      "light": "One Half Light",
+      "dark": "One Half Dark"
+    },
     "font": {
       "face": "CaskaydiaCove NF",
       "size": 9
