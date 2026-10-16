@@ -43,5 +43,5 @@ Edit files in `~\windows-setup`, then commit and push.
 
 ## Optional
 
-- `oled-fonts.ps1`: on an OLED monitor, switch text from ClearType to grayscale to get rid of
-  colored fringes. Not run by `install.ps1`; run it by hand, then restart apps or sign out.
+- `oled.ps1`: for OLED monitors. Switches text from ClearType to grayscale (no colored fringes)
+  and auto-hides the taskbar (burn-in). Not run by `install.ps1`; run it by hand, then restart apps or sign out.
