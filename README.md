@@ -40,3 +40,8 @@ Edit files in `~\windows-setup`, then commit and push.
 - `mac-keys.ahk`: double-click it to reload.
 - `powershell\profile.ps1`: open a new terminal tab.
 - `terminal\appearance.json`, `tweaks.ps1`: re-run `install.ps1` (or just that script).
+
+## Optional
+
+- `oled-fonts.ps1`: on an OLED monitor, switch text from ClearType to grayscale to get rid of
+  colored fringes. Not run by `install.ps1`; run it by hand, then restart apps or sign out.
