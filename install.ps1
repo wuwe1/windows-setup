@@ -102,4 +102,7 @@ if (Test-Path $CmdPalSettings) {
     Write-Warning 'Command Palette settings not found; set Alt+Space manually in its settings.'
 }
 
+$WhMods = (Get-ChildItem (Join-Path $Dir 'windhawk\mods') -Filter *.json).BaseName -join ', '
+Write-Host "==> By hand: in Windhawk install $WhMods, then run windhawk\apply.ps1" -ForegroundColor Yellow
+
 Write-Host '==> Done. mac-keys is running; open a new Windows Terminal tab to see the prompt.' -ForegroundColor Green

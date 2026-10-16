@@ -1,0 +1,33 @@
+{
+  "disabled": false,
+  "settings": {
+    "theme": {
+      "type": "String",
+      "value": "DockLike"
+    },
+    "styleConstants[0]": {
+      "type": "String",
+      "value": ""
+    },
+    "controlStyles[0].target": {
+      "type": "String",
+      "value": ""
+    },
+    "controlStyles[0].styles[0]": {
+      "type": "String",
+      "value": ""
+    },
+    "themeResourceVariables[0]": {
+      "type": "String",
+      "value": ""
+    },
+    "clickThroughTaskbar": {
+      "type": "DWord",
+      "value": 0
+    },
+    "xamlDiagnosticsHandling": {
+      "type": "String",
+      "value": "alert"
+    }
+  }
+}

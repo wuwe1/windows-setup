@@ -27,6 +27,9 @@ Safe to re-run. In order, it:
 8. Copies `powertoys\settings\` into PowerToys (which modules are on, plus each module's settings;
    restarts PowerToys) and sets the Command Palette hotkey to Alt+Space (Spotlight position).
 
+Then by hand: Windhawk can't install mods from a script, so install each mod named in `windhawk\mods\`
+from Windhawk's Explore tab, then run `windhawk\apply.ps1` (asks for admin) to restore their settings.
+
 Mac-style keys apply only in Chrome/Edge, Windows Terminal and File Explorer windows.
 
 ## Apps
@@ -44,6 +47,7 @@ Edit files in `~\windows-setup`, then commit and push.
 - `powertoys\settings\`: change things in PowerToys Settings, then run `powertoys\save.ps1` to copy them here.
   `powertoys\apply.ps1` goes the other way (overwrites this machine's PowerToys settings).
   Mouse Without Borders is not saved (its security key is per machine).
+- `windhawk\mods\`: one JSON per installed mod (its settings). After changing a mod, run `windhawk\save.ps1`.
 - `terminal\appearance.json`, `tweaks.ps1`: re-run `install.ps1` (or just that script).
 
 ## Optional

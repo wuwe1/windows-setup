@@ -1,0 +1,21 @@
+{
+  "disabled": false,
+  "settings": {
+    "calculateFolderSizes": {
+      "type": "String",
+      "value": "everything"
+    },
+    "sortSizesMixFolders": {
+      "type": "DWord",
+      "value": 1
+    },
+    "disableKbOnlySizes": {
+      "type": "String",
+      "value": "1"
+    },
+    "useIecTerms": {
+      "type": "DWord",
+      "value": 0
+    }
+  }
+}
