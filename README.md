@@ -30,7 +30,7 @@ Mac-style keys apply only in Chrome/Edge, Windows Terminal and File Explorer win
 
 ## Apps
 
-AutoHotkey, PowerToys, Everything, Files, Twinkle Tray, EarTrumpet, Windhawk,
+AutoHotkey, PowerToys, Everything, Twinkle Tray, EarTrumpet, Windhawk,
 Git, GitHub CLI, PowerShell 7, Oh My Posh. Add or remove one in `configuration.dsc.yaml`.
 
 ## Editing

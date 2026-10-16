@@ -55,13 +55,6 @@ properties:
         id: voidtools.Everything
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: files
-      directives:
-        description: Files (file manager)
-      settings:
-        id: FilesCommunity.Files
-        source: winget
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: twinkletray
       directives:
         description: Twinkle Tray (monitor brightness)
