@@ -30,7 +30,7 @@ Mac-style keys apply only in Chrome/Edge, Windows Terminal and File Explorer win
 
 ## Apps
 
-AutoHotkey, PowerToys, Everything, Twinkle Tray, EarTrumpet, Windhawk,
+AutoHotkey, PowerToys, Everything, YASB, Twinkle Tray, EarTrumpet, Windhawk,
 Git, GitHub CLI, PowerShell 7, Oh My Posh. Add or remove one in `configuration.dsc.yaml`.
 
 ## Editing
@@ -38,6 +38,7 @@ Git, GitHub CLI, PowerShell 7, Oh My Posh. Add or remove one in `configuration.d
 Edit files in `~\windows-setup`, then commit and push.
 
 - `mac-keys.ahk`: double-click it to reload.
+- `yasb`: copy of `~.configyasb` (top status bar). Installed only if missing; after changing the live one, copy it back here.
 - `powershell\profile.ps1`: open a new terminal tab.
 - `terminal\appearance.json`, `tweaks.ps1`: re-run `install.ps1` (or just that script).
 

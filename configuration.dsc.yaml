@@ -55,6 +55,13 @@ properties:
         id: voidtools.Everything
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: yasb
+      directives:
+        description: YASB (top status bar)
+      settings:
+        id: AmN.yasb
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: twinkletray
       directives:
         description: Twinkle Tray (monitor brightness)

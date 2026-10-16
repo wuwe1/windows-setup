@@ -53,6 +53,15 @@ if (-not ((Test-Path $Profile7) -and (Get-Content $Profile7 -Raw) -like "*$Stub*
 Write-Host '==> Applying Windows Terminal appearance' -ForegroundColor Cyan
 & $Pwsh -NoProfile -File (Join-Path $Dir 'terminal\apply.ps1')
 
+Write-Host '==> YASB status bar config' -ForegroundColor Cyan
+# Copy only if missing, so local tweaks on this machine are never overwritten
+$YasbDir = Join-Path $HOME '.config\yasb'
+New-Item -ItemType Directory -Force $YasbDir | Out-Null
+foreach ($f in 'config.yaml', 'styles.css') {
+    $To = Join-Path $YasbDir $f
+    if (-not (Test-Path $To)) { Copy-Item (Join-Path $Dir "yasb\$f") $To }
+}
+
 Write-Host '==> Applying Windows tweaks (tweaks.ps1)' -ForegroundColor Cyan
 & $Pwsh -NoProfile -File (Join-Path $Dir 'tweaks.ps1')
 
