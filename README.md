@@ -23,8 +23,9 @@ Safe to re-run. In order, it:
    (only those keys; backup in `settings.json.bak`).
 6. Runs `tweaks.ps1`: show file extensions and hidden files, no Start menu ads, full right-click menu, no Bing in search, no taskbar search box or Task View; then restarts Explorer.
    Turn off taskbar Widgets by hand (Settings > Personalization > Taskbar); Windows blocks scripts from changing it.
-7. Registers `mac-keys.ahk` to start at login, starts it, and sets the PowerToys
-   Command Palette hotkey to Alt+Space (Spotlight position).
+7. Registers `mac-keys.ahk` to start at login and starts it.
+8. Copies `powertoys\settings\` into PowerToys (which modules are on, plus each module's settings;
+   restarts PowerToys) and sets the Command Palette hotkey to Alt+Space (Spotlight position).
 
 Mac-style keys apply only in Chrome/Edge, Windows Terminal and File Explorer windows.
 
@@ -40,6 +41,9 @@ Edit files in `~\windows-setup`, then commit and push.
 - `mac-keys.ahk`: double-click it to reload.
 - `yasb\`: copy of `~\.config\yasb` (top status bar). Installed only if missing; after changing the live one, copy it back here.
 - `powershell\profile.ps1`: open a new terminal tab.
+- `powertoys\settings\`: change things in PowerToys Settings, then run `powertoys\save.ps1` to copy them here.
+  `powertoys\apply.ps1` goes the other way (overwrites this machine's PowerToys settings).
+  Mouse Without Borders is not saved (its security key is per machine).
 - `terminal\appearance.json`, `tweaks.ps1`: re-run `install.ps1` (or just that script).
 
 ## Optional

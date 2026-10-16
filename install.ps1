@@ -80,6 +80,9 @@ $Lnk.Save()
 
 Start-Process $Ahk -ArgumentList "`"$Script`""
 
+Write-Host '==> Applying PowerToys settings (powertoys\settings)' -ForegroundColor Cyan
+& $Pwsh -NoProfile -File (Join-Path $Dir 'powertoys\apply.ps1')
+
 Write-Host '==> Setting Command Palette hotkey to Alt+Space' -ForegroundColor Cyan
 # Settings file only appears after Command Palette's first run, so start PowerToys and wait for it
 $CmdPalSettings = "$env:LOCALAPPDATA\Packages\Microsoft.CommandPalette_8wekyb3d8bbwe\LocalState\settings.json"
