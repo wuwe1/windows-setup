@@ -12,6 +12,14 @@ $Json = $Old | ConvertFrom-Json -AsHashtable
 # Top-level settings (defaultProfile = PowerShell 7, whose GUID is the same on every machine)
 foreach ($k in $Want.global.Keys) { $Json[$k] = $Want.global[$k] }
 
+# Color schemes: add, or replace one with the same name
+$Schemes = [System.Collections.ArrayList]@($Json.schemes | Where-Object { $_ })
+foreach ($s in $Want.schemes) {
+    $Schemes = [System.Collections.ArrayList]@($Schemes | Where-Object { $_.name -ne $s.name })
+    [void]$Schemes.Add($s)
+}
+$Json.schemes = @($Schemes)
+
 if (-not $Json.profiles) { $Json.profiles = [ordered]@{} }
 if (-not $Json.profiles.defaults) { $Json.profiles.defaults = [ordered]@{} }
 foreach ($k in $Want.defaults.Keys) { $Json.profiles.defaults[$k] = $Want.defaults[$k] }
