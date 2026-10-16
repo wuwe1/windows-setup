@@ -21,7 +21,9 @@ Safe to re-run. In order, it:
    that loads `powershell\profile.ps1` (an existing profile is kept as `.bak`).
 5. Merges `terminal\appearance.json` into Windows Terminal's `settings.json`
    (only those keys; backup in `settings.json.bak`).
-6. Runs `tweaks.ps1`: show file extensions and hidden files, no Start menu ads, full right-click menu, no Bing in search, no taskbar search box or Task View; then restarts Explorer.
+6. Runs `tweaks.ps1`: show file extensions and hidden files, no Start menu ads, full right-click menu, no Bing in search, no taskbar search box or Task View;
+   no Copilot/Recall, lock screen fun facts, tips or Edge nags; Explorer opens to This PC without Home, Gallery or recent files;
+   Fast Startup off. One UAC prompt for the admin-only ones (policies, Fast Startup); then restarts Explorer.
    Turn off taskbar Widgets by hand (Settings > Personalization > Taskbar); Windows blocks scripts from changing it.
 7. Registers `mac-keys.ahk` to start at login and starts it.
 8. Copies `powertoys\settings\` into PowerToys (which modules are on, plus each module's settings;
