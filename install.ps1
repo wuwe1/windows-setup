@@ -50,6 +50,22 @@ if (-not ((Test-Path $Profile7) -and (Get-Content $Profile7 -Raw) -like "*$Stub*
     New-Item -ItemType File -Force $Profile7 -Value "$Stub`n" | Out-Null
 }
 
+Write-Host '==> Setting up Windows PowerShell 5.1 profile' -ForegroundColor Cyan
+# Tern and the Windows PowerShell console start 5.1; give it the same stub so the
+# prompt and aliases match PowerShell 7. 5.1 defaults to Restricted, which blocks
+# even the local stub, so allow unsigned local scripts for this user.
+& "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -Command `
+    'Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force'
+$Profile51 = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'WindowsPowerShell\Microsoft.PowerShell_profile.ps1'
+if (-not ((Test-Path $Profile51) -and (Get-Content $Profile51 -Raw) -like "*$Stub*")) {
+    New-Item -ItemType Directory -Force (Split-Path $Profile51) | Out-Null
+    if (Test-Path $Profile51) {
+        Move-Item $Profile51 "$Profile51.bak" -Force
+        Write-Warning "Old 5.1 profile saved as $Profile51.bak"
+    }
+    New-Item -ItemType File -Force $Profile51 -Value "$Stub`n" | Out-Null
+}
+
 Write-Host '==> Applying Windows Terminal appearance' -ForegroundColor Cyan
 & $Pwsh -NoProfile -File (Join-Path $Dir 'terminal\apply.ps1')
 

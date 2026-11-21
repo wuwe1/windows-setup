@@ -19,6 +19,9 @@ Safe to re-run. In order, it:
 3. Installs the CaskaydiaCove NF Nerd Font with oh-my-posh.
 4. Installs the Terminal-Icons module and makes PowerShell 7's `$PROFILE` a one-line stub
    that loads `powershell\profile.ps1` (an existing profile is kept as `.bak`).
+   Windows PowerShell 5.1's `$PROFILE` gets the same stub, and its execution policy
+   becomes `RemoteSigned` for this user: Tern and the old console start 5.1, so the
+   prompt and aliases work there too.
 5. Merges `terminal\appearance.json` into Windows Terminal's `settings.json`
    (only those keys; backup in `settings.json.bak`).
 6. Runs `tweaks.ps1`: show file extensions and hidden files, no Start menu ads, full right-click menu, no Bing in search, no taskbar search box or Task View;
